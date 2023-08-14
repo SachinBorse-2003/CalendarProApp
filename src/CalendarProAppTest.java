@@ -24,7 +24,6 @@ public class CalendarProAppTest {
         assertTrue(conflictTest1);
         assertFalse(conflictTest2);
 
-        // Clean up after the test
         events.clear();
     }
 
@@ -42,7 +41,6 @@ public class CalendarProAppTest {
         assertFalse(conflictTest1);
         assertFalse(conflictTest2);
 
-        // Clean up after the test
         events.clear();
     }
 }

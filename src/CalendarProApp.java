@@ -38,12 +38,12 @@ public class CalendarProApp {
             System.out.println("2. View Events");
             System.out.println("3. View Calendar of any month");
             System.out.println("4. Reminder Settings");
-            System.out.println("5. Search Events by Category"); // New option
-            System.out.println("6. Exit"); // Moved exit option to the end
+            System.out.println("5. Search Events by Category");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -59,7 +59,7 @@ public class CalendarProApp {
                 case 4:
                     setReminders(scanner);
                     break;
-                case 5: // New case for searching by category
+                case 5:
                     searchEventsByCategory(scanner);
                     break;
                 case 6:
@@ -120,7 +120,6 @@ public class CalendarProApp {
         System.out.print("Category: ");
         String category = scanner.nextLine();
 
-        // Check for scheduling conflicts before adding the event
         if (hasSchedulingConflict(eventDate, time)) {
             System.out.println("Scheduling conflict! The selected time is not available.");
             return;
@@ -135,10 +134,10 @@ public class CalendarProApp {
     public static boolean hasSchedulingConflict(LocalDate newEventDate, String newEventTime) {
         for (Event existingEvent : events) {
             if (existingEvent.date.equals(newEventDate) && existingEvent.time.equals(newEventTime)) {
-                return true; // Conflict found
+                return true;
             }
         }
-        return false; // No conflict
+        return false;
     }
 
     public static void viewEvents() {
@@ -157,7 +156,7 @@ public class CalendarProApp {
             }
         }
     }
-    
+
     public static void setReminders(Scanner scanner) {
         System.out.println("Reminder Settings:");
         System.out.println("1. Set Reminder");
@@ -165,7 +164,7 @@ public class CalendarProApp {
         System.out.print("Enter your choice: ");
 
         int reminderChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         switch (reminderChoice) {
             case 1:
@@ -177,7 +176,7 @@ public class CalendarProApp {
                 System.out.println("Invalid choice. Returning to main menu.");
         }
     }
-    
+
     public static void setCustomReminder(Scanner scanner) {
         System.out.print("Enter the event name for which you want to set a reminder: ");
         String eventName = scanner.nextLine();
@@ -198,11 +197,8 @@ public class CalendarProApp {
         System.out.print("Enter the number of days before the event to set the reminder: ");
         int daysBefore = scanner.nextInt();
 
-        // Calculate the reminder date based on the event date and days before
         LocalDate reminderDate = targetEvent.date.minusDays(daysBefore);
 
-        // Assuming you have a reminder system that sends notifications, here we're just
-        // printing a message
         System.out.println("Reminder set for " + targetEvent.name + " on " + reminderDate);
         long daysDifference = LocalDate.now().until(reminderDate).toTotalMonths();
         if (daysDifference == 0) {
@@ -213,7 +209,7 @@ public class CalendarProApp {
             System.out.println("Reminder: " + daysDifference + " days before.");
         }
     }
-    
+
     public static void searchEventsByCategory(Scanner scanner) {
         System.out.print("Enter category to search for events: ");
         String searchCategory = scanner.nextLine();
